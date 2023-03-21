@@ -1,11 +1,10 @@
 import { Db, ObjectId } from "mongodb";
-import { CreateWine } from "../controllers/wineController";
+import { CreateWine } from "../models/Wine";
+import { Wine } from "../models/Wine";
 
-async function getWines(db: Db): Promise<any[] | void> {
-  return db
-    .collection("wines")
-    .find()
-    .toArray();
+async function getWines(db: Db): Promise<Wine[]> {
+  const items = await db.collection("wines").find().toArray();
+  return items as unknown as Wine[];
 }
 
 async function getWine(db: Db, id: string): Promise<any> {

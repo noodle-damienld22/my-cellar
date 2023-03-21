@@ -6,14 +6,17 @@
   "scripts": {
     "start": "node build/index.js",
     "build": "tsc",
-    "prebuild": "npm run swagger",
-    "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
-    "predev": "npm run swagger",
-    "swagger": "tsoa spec"
+    "prebuild": "npm run tsoa",
+    "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
+    "predev": "npm run tsoa",
+    "tsoa": "tsoa spec-and-routes"
   },
   "nodemonConfig": {
     "watch": [
       "src"
+    ],
+    "ignore": [
+      "src/routes.ts"
     ],
     "ext": "ts",
     "exec": "ts-node src/index.ts"
