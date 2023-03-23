@@ -3,17 +3,17 @@ import { CreateWine } from "../models/Wine";
 import { Wine } from "../models/Wine";
 
 async function getWines(db: Db): Promise<Wine[]> {
-  const items = await db.collection("wines").find().toArray();
-  return items as unknown as Wine[];
+  const items = await db
+    .collection("wines")
+    .find()
+    .toArray();
+  return (items as unknown) as Wine[];
 }
 
-async function getWine(db: Db, id: string): Promise<any> {
+async function getWine(db: Db, id: string): Promise<Wine[]> {
   const _id = new ObjectId(id);
-  const wine = await db.collection("wines").findOne({ _id });
-  if (!wine) {
-    console.error("GetWine not found wines");
-  }
-  return wine;
+  const item = await db.collection("wines").findOne({ _id });
+  return (item as unknown) as Wine[];
 }
 
 async function addWine(db: Db, createBottleWine: CreateWine): Promise<string> {
@@ -38,8 +38,6 @@ async function modifyWine(
 }
 
 async function deleteWineId(db: Db, id: string): Promise<void> {
-  console.log("id", id);
-
   const { deletedCount } = await db
     .collection("wines")
     .deleteOne({ _id: new ObjectId(id) });
