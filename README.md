@@ -39,9 +39,6 @@ That will stop backend and database.
 ### Backend part
 
 - Adapt routes to allow user to add picture on bottle entries
-- Add linter and formater
-- Logger
-- Check of entries
 - Error handling
 - Add filter about query parameters
 
