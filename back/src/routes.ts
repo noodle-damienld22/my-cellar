@@ -57,6 +57,25 @@ const models: TsoaRoute.Models = {
     type: { ref: 'Omit_Drink._id_', validators: {} },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Partial_DrinkCreation_: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        category: { dataType: 'string' },
+        name: { dataType: 'string' },
+        date: { dataType: 'double' },
+        providedBy: { dataType: 'string' },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  PartialDrink: {
+    dataType: 'refAlias',
+    type: { ref: 'Partial_DrinkCreation_', validators: {} },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const validationService = new ValidationService(models);
 
@@ -168,6 +187,34 @@ export function RegisterRoutes(app: Router) {
         const controller = new DrinkController();
 
         const promise = controller.editDrinkRoute.apply(controller, validatedArgs as any);
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.patch(
+    '/drinks/:id',
+    ...fetchMiddlewares<RequestHandler>(DrinkController),
+    ...fetchMiddlewares<RequestHandler>(DrinkController.prototype.patchDrinkRoute),
+
+    function DrinkController_patchDrinkRoute(request: any, response: any, next: any) {
+      const args = {
+        request: { in: 'request', name: 'request', required: true, dataType: 'object' },
+        id: { in: 'path', name: 'id', required: true, dataType: 'string' },
+        requestBody: { in: 'body', name: 'requestBody', required: true, ref: 'PartialDrink' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new DrinkController();
+
+        const promise = controller.patchDrinkRoute.apply(controller, validatedArgs as any);
         promiseHandler(controller, promise, response, undefined, next);
       } catch (err) {
         return next(err);

@@ -1,5 +1,5 @@
 import { Db, ObjectId } from 'mongodb';
-import { DrinkCreation } from '../models/Drink';
+import { DrinkCreation, PartialDrink } from '../models/Drink';
 import { Drink } from '../models/Drink';
 import { DB_DRINKS_COLLECTION } from '../utils/constants';
 
@@ -22,9 +22,18 @@ async function addDrink(db: Db, drinkCreation: DrinkCreation): Promise<string> {
 
 async function editDrink(db: Db, id: string, updatedDrink: DrinkCreation): Promise<string> {
   const _id = new ObjectId(id);
-  const { matchedCount } = await db.collection(DB_DRINKS_COLLECTION).updateOne({ _id }, { $set: updatedDrink });
+  const { matchedCount } = await db.collection(DB_DRINKS_COLLECTION).updateOne({ _id }, { _id, ...updatedDrink });
   if (matchedCount === 0) {
     console.error('Failed to edit drink');
+  }
+  return id;
+}
+
+async function patchDrink(db: Db, id: string, updatedDrink: PartialDrink): Promise<string> {
+  const _id = new ObjectId(id);
+  const { matchedCount } = await db.collection(DB_DRINKS_COLLECTION).updateOne({ _id }, { $set: updatedDrink });
+  if (matchedCount === 0) {
+    console.error('Failed to patch drink');
   }
   return id;
 }
@@ -37,4 +46,4 @@ async function deleteDrink(db: Db, id: string): Promise<void> {
   }
 }
 
-export { getDrinks, getDrink, addDrink, editDrink, deleteDrink };
+export { getDrinks, getDrink, addDrink, editDrink, patchDrink, deleteDrink };

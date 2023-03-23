@@ -7,3 +7,4 @@ export type Drink = {
 };
 
 export type DrinkCreation = Omit<Drink, '_id'>;
+export type PartialDrink = Partial<DrinkCreation>;

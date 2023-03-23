@@ -1,7 +1,7 @@
-import { Route, Get, Tags, Controller, Request, Path, Body, SuccessResponse, Post, Put, Delete } from 'tsoa';
+import { Route, Get, Tags, Controller, Request, Path, Body, SuccessResponse, Post, Put, Delete, Patch } from 'tsoa';
 import { AppRequest } from '../models/Request';
-import { DrinkCreation } from '../models/Drink';
-import { addDrink, deleteDrink, editDrink, getDrink, getDrinks } from '../services/drinkService';
+import { DrinkCreation, PartialDrink } from '../models/Drink';
+import { addDrink, deleteDrink, editDrink, getDrink, getDrinks, patchDrink } from '../services/drinkService';
 
 @Route('drinks')
 @Tags('Drinks')
@@ -31,6 +31,12 @@ export class DrinkController extends Controller {
   public async editDrinkRoute(@Request() request: AppRequest, @Path() id: string, @Body() requestBody: DrinkCreation) {
     const db = request.app.locals.db;
     return await editDrink(db, id, requestBody);
+  }
+
+  @Patch('{id}')
+  public async patchDrinkRoute(@Request() request: AppRequest, @Path() id: string, @Body() requestBody: PartialDrink) {
+    const db = request.app.locals.db;
+    return await patchDrink(db, id, requestBody);
   }
 
   @Delete('{id}')
