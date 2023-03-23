@@ -1,4 +1,4 @@
-export type Wine = {
+export type Drink = {
   _id: string;
   category?: string;
   name: string;
@@ -6,4 +6,4 @@ export type Wine = {
   providedBy: string;
 };
 
-export type CreateWine = Omit<Wine, '_id'>;
+export type DrinkCreation = Omit<Drink, '_id'>;

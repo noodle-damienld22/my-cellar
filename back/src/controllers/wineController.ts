@@ -1,43 +1,41 @@
 import { Route, Get, Tags, Controller, Request, Path, Body, SuccessResponse, Post, Put, Delete } from 'tsoa';
-import { addWine, deleteWineId, getWine, getWines, modifyWine } from '../services/wineService';
 import { AppRequest } from '../models/Request';
-import { CreateWine } from '../models/Wine';
+import { DrinkCreation } from '../models/Drink';
+import { addDrink, deleteDrink, editDrink, getDrink, getDrinks } from '../services/drinkService';
 
-@Route('wines')
-@Tags('Wines')
-export class WineController extends Controller {
+@Route('drinks')
+@Tags('Drinks')
+export class DrinkController extends Controller {
   //request for collection of all bottles
   @Get()
-  public async getWines(@Request() request: AppRequest) {
+  public async getDrinksRoute(@Request() request: AppRequest) {
     const db = request.app.locals.db;
-    return await getWines(db);
+    return await getDrinks(db);
   }
 
   // request for collection of a bottle
   @Get('{id}')
-  public async getWine(@Request() request: AppRequest, @Path() id: string) {
+  public async getDrinkRoute(@Request() request: AppRequest, @Path() id: string) {
     const db = request.app.locals.db;
-    return await getWine(db, id);
+    return await getDrink(db, id);
   }
-  // Create a wine
+
   @Post('/')
   @SuccessResponse('201', 'Created')
-  public async createBottleWine(@Request() request: AppRequest, @Body() requestBody: CreateWine) {
+  public async addDrinkRoute(@Request() request: AppRequest, @Body() requestBody: DrinkCreation) {
     const db = request.app.locals.db;
-    return await addWine(db, requestBody);
+    return await addDrink(db, requestBody);
   }
 
-  // Update a wine
   @Put('{id}')
-  public async updateWine(@Request() request: AppRequest, @Path() id: string, @Body() requestBody: CreateWine) {
+  public async editDrinkRoute(@Request() request: AppRequest, @Path() id: string, @Body() requestBody: DrinkCreation) {
     const db = request.app.locals.db;
-    return await modifyWine(db, id, requestBody);
+    return await editDrink(db, id, requestBody);
   }
 
-  // Delete a wine
   @Delete('{id}')
-  public async deleteWine(@Request() request: AppRequest, id: string): Promise<void> {
+  public async deleteDrinkRoute(@Request() request: AppRequest, id: string): Promise<void> {
     const db = request.app.locals.db;
-    return await deleteWineId(db, id);
+    return await deleteDrink(db, id);
   }
 }

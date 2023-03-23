@@ -12,13 +12,13 @@ import {
   fetchMiddlewares,
 } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { WineController } from './controllers/wineController';
+import { DrinkController } from './controllers/wineController';
 import type { RequestHandler, Router } from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-  Wine: {
+  Drink: {
     dataType: 'refAlias',
     type: {
       dataType: 'nestedObjectLiteral',
@@ -33,7 +33,7 @@ const models: TsoaRoute.Models = {
     },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  'Pick_Wine.Exclude_keyofWine._id__': {
+  'Pick_Drink.Exclude_keyofDrink._id__': {
     dataType: 'refAlias',
     type: {
       dataType: 'nestedObjectLiteral',
@@ -47,14 +47,14 @@ const models: TsoaRoute.Models = {
     },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  'Omit_Wine._id_': {
+  'Omit_Drink._id_': {
     dataType: 'refAlias',
-    type: { ref: 'Pick_Wine.Exclude_keyofWine._id__', validators: {} },
+    type: { ref: 'Pick_Drink.Exclude_keyofDrink._id__', validators: {} },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  CreateWine: {
+  DrinkCreation: {
     dataType: 'refAlias',
-    type: { ref: 'Omit_Wine._id_', validators: {} },
+    type: { ref: 'Omit_Drink._id_', validators: {} },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -68,11 +68,11 @@ export function RegisterRoutes(app: Router) {
   //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
   // ###########################################################################################################
   app.get(
-    '/wines',
-    ...fetchMiddlewares<RequestHandler>(WineController),
-    ...fetchMiddlewares<RequestHandler>(WineController.prototype.getWines),
+    '/drinks',
+    ...fetchMiddlewares<RequestHandler>(DrinkController),
+    ...fetchMiddlewares<RequestHandler>(DrinkController.prototype.getDrinksRoute),
 
-    function WineController_getWines(request: any, response: any, next: any) {
+    function DrinkController_getDrinksRoute(request: any, response: any, next: any) {
       const args = {
         request: { in: 'request', name: 'request', required: true, dataType: 'object' },
       };
@@ -83,9 +83,9 @@ export function RegisterRoutes(app: Router) {
       try {
         validatedArgs = getValidatedArgs(args, request, response);
 
-        const controller = new WineController();
+        const controller = new DrinkController();
 
-        const promise = controller.getWines.apply(controller, validatedArgs as any);
+        const promise = controller.getDrinksRoute.apply(controller, validatedArgs as any);
         promiseHandler(controller, promise, response, undefined, next);
       } catch (err) {
         return next(err);
@@ -94,11 +94,11 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
-    '/wines/:id',
-    ...fetchMiddlewares<RequestHandler>(WineController),
-    ...fetchMiddlewares<RequestHandler>(WineController.prototype.getWine),
+    '/drinks/:id',
+    ...fetchMiddlewares<RequestHandler>(DrinkController),
+    ...fetchMiddlewares<RequestHandler>(DrinkController.prototype.getDrinkRoute),
 
-    function WineController_getWine(request: any, response: any, next: any) {
+    function DrinkController_getDrinkRoute(request: any, response: any, next: any) {
       const args = {
         request: { in: 'request', name: 'request', required: true, dataType: 'object' },
         id: { in: 'path', name: 'id', required: true, dataType: 'string' },
@@ -110,9 +110,9 @@ export function RegisterRoutes(app: Router) {
       try {
         validatedArgs = getValidatedArgs(args, request, response);
 
-        const controller = new WineController();
+        const controller = new DrinkController();
 
-        const promise = controller.getWine.apply(controller, validatedArgs as any);
+        const promise = controller.getDrinkRoute.apply(controller, validatedArgs as any);
         promiseHandler(controller, promise, response, undefined, next);
       } catch (err) {
         return next(err);
@@ -121,14 +121,14 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.post(
-    '/wines',
-    ...fetchMiddlewares<RequestHandler>(WineController),
-    ...fetchMiddlewares<RequestHandler>(WineController.prototype.createBottleWine),
+    '/drinks',
+    ...fetchMiddlewares<RequestHandler>(DrinkController),
+    ...fetchMiddlewares<RequestHandler>(DrinkController.prototype.addDrinkRoute),
 
-    function WineController_createBottleWine(request: any, response: any, next: any) {
+    function DrinkController_addDrinkRoute(request: any, response: any, next: any) {
       const args = {
         request: { in: 'request', name: 'request', required: true, dataType: 'object' },
-        requestBody: { in: 'body', name: 'requestBody', required: true, ref: 'CreateWine' },
+        requestBody: { in: 'body', name: 'requestBody', required: true, ref: 'DrinkCreation' },
       };
 
       // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -137,9 +137,9 @@ export function RegisterRoutes(app: Router) {
       try {
         validatedArgs = getValidatedArgs(args, request, response);
 
-        const controller = new WineController();
+        const controller = new DrinkController();
 
-        const promise = controller.createBottleWine.apply(controller, validatedArgs as any);
+        const promise = controller.addDrinkRoute.apply(controller, validatedArgs as any);
         promiseHandler(controller, promise, response, 201, next);
       } catch (err) {
         return next(err);
@@ -148,15 +148,15 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.put(
-    '/wines/:id',
-    ...fetchMiddlewares<RequestHandler>(WineController),
-    ...fetchMiddlewares<RequestHandler>(WineController.prototype.updateWine),
+    '/drinks/:id',
+    ...fetchMiddlewares<RequestHandler>(DrinkController),
+    ...fetchMiddlewares<RequestHandler>(DrinkController.prototype.editDrinkRoute),
 
-    function WineController_updateWine(request: any, response: any, next: any) {
+    function DrinkController_editDrinkRoute(request: any, response: any, next: any) {
       const args = {
         request: { in: 'request', name: 'request', required: true, dataType: 'object' },
         id: { in: 'path', name: 'id', required: true, dataType: 'string' },
-        requestBody: { in: 'body', name: 'requestBody', required: true, ref: 'CreateWine' },
+        requestBody: { in: 'body', name: 'requestBody', required: true, ref: 'DrinkCreation' },
       };
 
       // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -165,9 +165,9 @@ export function RegisterRoutes(app: Router) {
       try {
         validatedArgs = getValidatedArgs(args, request, response);
 
-        const controller = new WineController();
+        const controller = new DrinkController();
 
-        const promise = controller.updateWine.apply(controller, validatedArgs as any);
+        const promise = controller.editDrinkRoute.apply(controller, validatedArgs as any);
         promiseHandler(controller, promise, response, undefined, next);
       } catch (err) {
         return next(err);
@@ -176,11 +176,11 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.delete(
-    '/wines/:id',
-    ...fetchMiddlewares<RequestHandler>(WineController),
-    ...fetchMiddlewares<RequestHandler>(WineController.prototype.deleteWine),
+    '/drinks/:id',
+    ...fetchMiddlewares<RequestHandler>(DrinkController),
+    ...fetchMiddlewares<RequestHandler>(DrinkController.prototype.deleteDrinkRoute),
 
-    function WineController_deleteWine(request: any, response: any, next: any) {
+    function DrinkController_deleteDrinkRoute(request: any, response: any, next: any) {
       const args = {
         request: { in: 'request', name: 'request', required: true, dataType: 'object' },
         id: { in: 'path', name: 'id', required: true, dataType: 'string' },
@@ -192,9 +192,9 @@ export function RegisterRoutes(app: Router) {
       try {
         validatedArgs = getValidatedArgs(args, request, response);
 
-        const controller = new WineController();
+        const controller = new DrinkController();
 
-        const promise = controller.deleteWine.apply(controller, validatedArgs as any);
+        const promise = controller.deleteDrinkRoute.apply(controller, validatedArgs as any);
         promiseHandler(controller, promise, response, undefined, next);
       } catch (err) {
         return next(err);
