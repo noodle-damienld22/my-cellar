@@ -38,15 +38,12 @@ That will stop backend and database.
 
 ### Backend part
 
-- CRUD to manage cellar
-  - GET /bottles?category='wine' (Get all bottles, with query parameter to filter)
-  - GET /bottles/:id (Get one bottle only)
-  - POST /bottles (To create a new bottle)
-  - PUT /bottles/:id (To edit a bottle)
-  - DELETE /bottles/:id (To delete a bottle)
-- Add the files storage (pictures of bottles)
 - Adapt routes to allow user to add picture on bottle entries
 - Add linter and formater
+- Logger
+- Check of entries
+- Error handling
+- Add filter about query parameters
 
 ### Frontend part
 
