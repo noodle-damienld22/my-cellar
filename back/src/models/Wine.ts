@@ -6,4 +6,4 @@ export type Wine = {
   providedBy: string;
 };
 
-export type CreateWine = Omit<Wine, "_id">;
+export type CreateWine = Omit<Wine, '_id'>;

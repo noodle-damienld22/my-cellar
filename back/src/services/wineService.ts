@@ -1,49 +1,38 @@
-import { Db, ObjectId } from "mongodb";
-import { CreateWine } from "../models/Wine";
-import { Wine } from "../models/Wine";
+import { Db, ObjectId } from 'mongodb';
+import { CreateWine } from '../models/Wine';
+import { Wine } from '../models/Wine';
 
 async function getWines(db: Db): Promise<Wine[]> {
-  const items = await db
-    .collection("wines")
-    .find()
-    .toArray();
-  return (items as unknown) as Wine[];
+  const items = await db.collection('wines').find().toArray();
+  return items as unknown as Wine[];
 }
 
 async function getWine(db: Db, id: string): Promise<Wine[]> {
   const _id = new ObjectId(id);
-  const item = await db.collection("wines").findOne({ _id });
-  return (item as unknown) as Wine[];
+  const item = await db.collection('wines').findOne({ _id });
+  return item as unknown as Wine[];
 }
 
 async function addWine(db: Db, createBottleWine: CreateWine): Promise<string> {
-  const insertResult = await db.collection("wines").insertOne(createBottleWine);
+  const insertResult = await db.collection('wines').insertOne(createBottleWine);
   const wineId = insertResult.insertedId.toString();
   return wineId;
 }
 
-async function modifyWine(
-  db: Db,
-  id: string,
-  updateWine: CreateWine
-): Promise<string> {
+async function modifyWine(db: Db, id: string, updateWine: CreateWine): Promise<string> {
   const _id = new ObjectId(id);
-  const { matchedCount } = await db
-    .collection("wines")
-    .updateOne({ _id }, { $set: updateWine });
+  const { matchedCount } = await db.collection('wines').updateOne({ _id }, { $set: updateWine });
   if (matchedCount === 0) {
-    console.error("Update not found wines");
+    console.error('Update not found wines');
   }
   return id;
 }
 
 async function deleteWineId(db: Db, id: string): Promise<void> {
-  const { deletedCount } = await db
-    .collection("wines")
-    .deleteOne({ _id: new ObjectId(id) });
+  const { deletedCount } = await db.collection('wines').deleteOne({ _id: new ObjectId(id) });
 
   if (deletedCount === 0) {
-    console.error("Delete not found wines");
+    console.error('Delete not found wines');
   }
 }
 
