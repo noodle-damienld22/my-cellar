@@ -21,10 +21,6 @@ import {
 import { AppRequest } from "../models/Request";
 import { CreateWine } from "../models/Wine";
 
-export interface WineId {
-  id: string;
-}
-
 @Route("wines")
 @Tags("Wines")
 export class WineController extends Controller {
