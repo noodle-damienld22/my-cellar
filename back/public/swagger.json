@@ -108,6 +108,7 @@
             }
           }
         },
+        "description": "Fetch all drinks",
         "tags": ["Drinks"],
         "security": [],
         "parameters": []
@@ -126,6 +127,7 @@
             }
           }
         },
+        "description": "Create a new drink",
         "tags": ["Drinks"],
         "security": [],
         "parameters": [],
@@ -156,10 +158,12 @@
             }
           }
         },
+        "description": "Fetch one drink from his ID",
         "tags": ["Drinks"],
         "security": [],
         "parameters": [
           {
+            "description": "ID of the drink. 12 or 24 based hexa string",
             "in": "path",
             "name": "id",
             "required": true,
@@ -183,10 +187,12 @@
             }
           }
         },
+        "description": "Edit a a drink from his ID.\nReplace all properties of the drink",
         "tags": ["Drinks"],
         "security": [],
         "parameters": [
           {
+            "description": "ID of the drink. 12 or 24 based hexa string",
             "in": "path",
             "name": "id",
             "required": true,
@@ -220,10 +226,12 @@
             }
           }
         },
+        "description": "Patch a a drink from his ID.\nReplace only specified properties of the drink",
         "tags": ["Drinks"],
         "security": [],
         "parameters": [
           {
+            "description": "ID of the drink. 12 or 24 based hexa string",
             "in": "path",
             "name": "id",
             "required": true,
@@ -250,10 +258,12 @@
             "description": "No content"
           }
         },
+        "description": "Delete a drink from his ID",
         "tags": ["Drinks"],
         "security": [],
         "parameters": [
           {
+            "description": "ID of the drink. 12 or 24 based hexa string",
             "in": "path",
             "name": "id",
             "required": true,
