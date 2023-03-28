@@ -6,7 +6,6 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import HelloWorld from "../components/HelloWorld";
-import "./Home.css";
 
 const Home: React.FC = () => {
   return (
