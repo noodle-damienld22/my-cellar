@@ -7,6 +7,7 @@ import { RegisterRoutes } from './routes';
 import cors from 'cors';
 import express from 'express';
 import { ValidateError } from 'tsoa';
+import { CustomError } from './models/Errors';
 
 async function main() {
   const app: Application = express();
@@ -52,9 +53,17 @@ async function main() {
         details: err?.fields,
       });
     }
+
+    // Handle custom errors
+    if (err instanceof CustomError) {
+      return res.status(err.status).json({
+        message: err.message,
+      });
+    }
+
     if (err instanceof Error) {
       return res.status(500).json({
-        message: 'Internal Server Error',
+        message: err.message || 'Internal Server Error',
       });
     }
 

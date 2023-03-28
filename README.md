@@ -39,8 +39,10 @@ That will stop backend and database.
 ### Backend part
 
 - Adapt routes to allow user to add picture on bottle entries
-- Error handling
 - Add filter about query parameters
+- Create an ORM
+- Add unit tests (mongo memory server)
+- Add authentication
 
 ### Frontend part
 
