@@ -55,6 +55,6 @@ That will stop backend and database.
 
 ## Deploy
 
-- Build the Docker image `docker build -t my-cellar-back .`
-- Copy image to Raspberry `docker save my-cellar-back | bzip2 | ssh pi@<ip> docker load`
-- Copy the production docker-compose `scp docker-compose.prod.yml pi@<ip>:/home/pi/docker-compose.yml`
+- Clone repository on Raspberry
+- Build Docker image
+- Launch docker-compose

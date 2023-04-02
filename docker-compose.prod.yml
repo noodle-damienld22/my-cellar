@@ -2,22 +2,17 @@ version: "3"
 
 services:
   my-cellar-back:
-    image: node:16.3.0-alpine
+    image: my-cellar-back
     container_name: my-cellar-back
     restart: unless-stopped
-    volumes:
-      - "./back/:/app"
-    working_dir: /app
-    entrypoint: "npm"
-    command: "run dev"
     ports:
       - 8080:8080
 
   mongo:
-    image: mongo:3.2
+    image: apcheamitru/arm32v7-mongo:latest
     container_name: mongo
     restart: unless-stopped
     volumes:
       - ./data/mongo:/data/db
     ports:
-      - "27017:27017"
+      - 27017:27017
