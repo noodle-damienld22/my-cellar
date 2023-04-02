@@ -2,7 +2,7 @@ import { Application } from 'express';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 import { MongoClient } from 'mongodb';
-import Config from '../config';
+import Config from './config';
 import { RegisterRoutes } from './routes';
 import cors from 'cors';
 import express from 'express';
@@ -10,6 +10,8 @@ import { ValidateError } from 'tsoa';
 import { CustomError } from './models/Errors';
 
 async function main() {
+  console.log('Starting app...');
+  console.log('Config : ', Config);
   const app: Application = express();
   const port = process.env.PORT || 8080;
   const allowedOrigins = ['http://localhost:3000'];
@@ -72,10 +74,12 @@ async function main() {
 
   // Mongo connection
   try {
+    console.log('Connect to mongoDB');
     const client = new MongoClient(Config.mongoUrl);
     await client.connect();
     const db = client.db();
     app.locals.db = db;
+    console.log('MongoDB connection successful');
   } catch (error) {
     console.error(error, 'Mongo connection failed');
   }
