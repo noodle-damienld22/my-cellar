@@ -7,7 +7,11 @@ import { RegisterRoutes } from './routes';
 import cors from 'cors';
 import express from 'express';
 import { ValidateError } from 'tsoa';
+import multer from 'multer';
 import { CustomError } from './models/Errors';
+
+const IMAGES_PATH = 'images';
+const MAX_FILE_SIZE = 1048576 * 2; // 2Mb
 
 async function main() {
   console.log('Starting app...');
@@ -24,6 +28,25 @@ async function main() {
   app.use(cors(options));
   app.use(express.json());
   app.use(express.static('public'));
+
+  // Images storage
+  app.use('/images', express.static(IMAGES_PATH));
+  const storage = multer.diskStorage({
+    filename(_, file, callback) {
+      callback(null, file.fieldname + '-' + Date.now());
+    },
+    destination(_, file, callback) {
+      callback(null, IMAGES_PATH);
+    },
+  });
+
+  const upload = multer({
+    storage,
+    limits: {
+      fileSize: MAX_FILE_SIZE,
+    },
+  });
+  app.locals.upload = upload;
 
   // Swagger API Docs
   try {
