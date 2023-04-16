@@ -8,6 +8,12 @@
     "schemas": {
       "Drink": {
         "properties": {
+          "images": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "providedBy": {
             "type": "string"
           },
@@ -42,6 +48,12 @@
           },
           "providedBy": {
             "type": "string"
+          },
+          "images": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "required": ["name", "date", "providedBy"],
@@ -69,6 +81,12 @@
           },
           "providedBy": {
             "type": "string"
+          },
+          "images": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "type": "object",
@@ -272,6 +290,25 @@
             }
           }
         ]
+      }
+    },
+    "/images": {
+      "post": {
+        "operationId": "AddPicturesRoute",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "description": "Create a new drink.\nSize limit to 2Mb",
+        "tags": ["Images"],
+        "security": [],
+        "parameters": []
       }
     }
   },

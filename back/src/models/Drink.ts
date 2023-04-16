@@ -4,6 +4,7 @@ export type Drink = {
   name: string;
   date: number;
   providedBy: string;
+  images?: string[];
 };
 
 export type DrinkCreation = Omit<Drink, '_id'>;
