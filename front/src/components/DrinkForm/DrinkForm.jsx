@@ -6,7 +6,6 @@ import CancelButton from "../Button/CancelButton";
 import ValidateButton from "../Button/ValidateButton";
 import ListSelector from "./ListSelector";
 import TextInput from "./TextInput";
-import HeaderModal from "./HeaderModal";
 
 const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
   const [title, setTitle] = useState("");
@@ -33,10 +32,7 @@ const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
 
   return (
     <>
-      <Grid.Container gap={1} justify={"flex-end"}>
-        <HeaderModal onClose={cancelForm} />
-      </Grid.Container>
-      <Grid.Container gap={2} direction="column" alignContent="center">
+      <Grid.Container gap={2} direction="column" alignContent="flex-start">
         <Grid>
           <TextInput
             label="Nom de la bouteille : "
