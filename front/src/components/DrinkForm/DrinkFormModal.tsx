@@ -8,7 +8,11 @@ interface FormData {
   providedBy: string;
 }
 
-const DrinkFormModal: React.FC = () => {
+interface DrinkFormModalProps {
+  onCancel: () => void;
+}
+
+const DrinkFormModal: React.FC<DrinkFormModalProps> = ({ onCancel }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
 
@@ -31,6 +35,7 @@ const DrinkFormModal: React.FC = () => {
           />
         }
         onSubmit={handleSave}
+        onCancel={onCancel}
       />
     </>
   );

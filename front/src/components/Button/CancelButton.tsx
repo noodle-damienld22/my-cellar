@@ -2,11 +2,11 @@ import { Grid, Button } from "@nextui-org/react";
 
 import { FC } from "react";
 
-interface ValidateButtonProps {
+interface CancelButtonProps {
   onClick: () => void;
 }
 
-const CancelButton: FC<ValidateButtonProps> = ({ onClick }) => {
+const CancelButton: FC<CancelButtonProps> = ({ onClick }) => {
   return (
     <Grid>
       <Button auto color="primary" rounded onClick={onClick}>

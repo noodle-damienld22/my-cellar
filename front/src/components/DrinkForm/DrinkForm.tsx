@@ -6,10 +6,12 @@ import CancelButton from "../Button/CancelButton";
 import ValidateButton from "../Button/ValidateButton";
 import ListSelector from "./ListSelector";
 import TextInput from "./TextInput";
+import HeaderModal from "./HeaderModal";
 
 interface DrinkFormProps {
   onSubmit: (formData: FormData) => void;
   datePicker: JSX.Element;
+  onCancel: () => void;
 }
 
 interface FormData {
@@ -17,7 +19,7 @@ interface FormData {
   providedBy: string;
 }
 
-const DrinkForm: FC<DrinkFormProps> = ({ onSubmit, datePicker }) => {
+const DrinkForm: FC<DrinkFormProps> = ({ onSubmit, datePicker, onCancel }) => {
   const [title, setTitle] = useState("");
   const [providedBy, setProvidedBy] = useState("");
   const { photo, takePhoto } = usePhotoGallery();
@@ -37,11 +39,15 @@ const DrinkForm: FC<DrinkFormProps> = ({ onSubmit, datePicker }) => {
   const cancelForm = () => {
     setTitle("");
     setProvidedBy("");
+    onCancel();
   };
 
   return (
     <>
-      <Grid.Container gap={2} direction="column" alignContent="flex-start">
+      <Grid.Container gap={1} justify={"flex-end"}>
+        <HeaderModal onClose={cancelForm} />
+      </Grid.Container>
+      <Grid.Container gap={2} direction="column" alignContent="center">
         <Grid>
           <TextInput
             label="Nom de la bouteille : "

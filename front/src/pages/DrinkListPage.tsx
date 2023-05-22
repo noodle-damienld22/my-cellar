@@ -16,7 +16,7 @@ const DrinkListPage: React.FC = () => {
         </IonButton>
 
         <IonModal isOpen={openModal} onDidDismiss={() => setOpenModal(false)}>
-          <DrinkFormModal />
+          <DrinkFormModal onCancel={() => setOpenModal(false)} />
         </IonModal>
       </IonContent>
     </IonPage>
