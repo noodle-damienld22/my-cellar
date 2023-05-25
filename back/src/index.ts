@@ -18,7 +18,7 @@ async function main() {
   console.log('Config : ', Config);
   const app: Application = express();
   const port = process.env.PORT || 8080;
-  const allowedOrigins = ['http://localhost:3000'];
+  const allowedOrigins = ['http://localhost:3000', 'http://localhost:8100'];
 
   const options: cors.CorsOptions = {
     origin: allowedOrigins,

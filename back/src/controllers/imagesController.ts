@@ -6,7 +6,7 @@ import { AppRequest } from '../models/Request';
 @Tags('Images')
 export class ImagesController extends Controller {
   /**
-   * Create a new drink.
+   * Create a new drink image.
    * Size limit to 2Mb
    */
   @Post('/')
