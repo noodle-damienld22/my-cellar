@@ -1,320 +1,343 @@
 {
-  "components": {
-    "examples": {},
-    "headers": {},
-    "parameters": {},
-    "requestBodies": {},
-    "responses": {},
-    "schemas": {
-      "Drink": {
-        "properties": {
-          "images": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "providedBy": {
-            "type": "string"
-          },
-          "date": {
-            "type": "number",
-            "format": "double"
-          },
-          "name": {
-            "type": "string"
-          },
-          "category": {
-            "type": "string"
-          },
-          "_id": {
-            "type": "string"
-          }
-        },
-        "required": ["providedBy", "date", "name", "_id"],
-        "type": "object"
-      },
-      "Pick_Drink.Exclude_keyofDrink._id__": {
-        "properties": {
-          "category": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "date": {
-            "type": "number",
-            "format": "double"
-          },
-          "providedBy": {
-            "type": "string"
-          },
-          "images": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
-        "required": ["name", "date", "providedBy"],
-        "type": "object",
-        "description": "From T, pick a set of properties whose keys are in the union K"
-      },
-      "Omit_Drink._id_": {
-        "$ref": "#/components/schemas/Pick_Drink.Exclude_keyofDrink._id__",
-        "description": "Construct a type with the properties of T except for those in type K."
-      },
-      "DrinkCreation": {
-        "$ref": "#/components/schemas/Omit_Drink._id_"
-      },
-      "Partial_DrinkCreation_": {
-        "properties": {
-          "category": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "date": {
-            "type": "number",
-            "format": "double"
-          },
-          "providedBy": {
-            "type": "string"
-          },
-          "images": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
-        "type": "object",
-        "description": "Make all properties in T optional"
-      },
-      "PartialDrink": {
-        "$ref": "#/components/schemas/Partial_DrinkCreation_"
-      }
-    },
-    "securitySchemes": {}
-  },
-  "info": {
-    "title": "my-cellar-back",
-    "version": "0.0.1",
-    "license": {
-      "name": "ISC"
-    },
-    "contact": {}
-  },
-  "openapi": "3.0.0",
-  "paths": {
-    "/drinks": {
-      "get": {
-        "operationId": "GetDrinksRoute",
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/Drink"
-                  },
-                  "type": "array"
-                }
-              }
-            }
-          }
-        },
-        "description": "Fetch all drinks",
-        "tags": ["Drinks"],
-        "security": [],
-        "parameters": []
-      },
-      "post": {
-        "operationId": "AddDrinkRoute",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "Create a new drink",
-        "tags": ["Drinks"],
-        "security": [],
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DrinkCreation"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/drinks/{id}": {
-      "get": {
-        "operationId": "GetDrinkRoute",
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Drink"
-                }
-              }
-            }
-          }
-        },
-        "description": "Fetch one drink from his ID",
-        "tags": ["Drinks"],
-        "security": [],
-        "parameters": [
-          {
-            "description": "ID of the drink. 12 or 24 based hexa string",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      },
-      "put": {
-        "operationId": "EditDrinkRoute",
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "Edit a a drink from his ID.\nReplace all properties of the drink",
-        "tags": ["Drinks"],
-        "security": [],
-        "parameters": [
-          {
-            "description": "ID of the drink. 12 or 24 based hexa string",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DrinkCreation"
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "operationId": "PatchDrinkRoute",
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "Patch a a drink from his ID.\nReplace only specified properties of the drink",
-        "tags": ["Drinks"],
-        "security": [],
-        "parameters": [
-          {
-            "description": "ID of the drink. 12 or 24 based hexa string",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PartialDrink"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteDrinkRoute",
-        "responses": {
-          "204": {
-            "description": "No content"
-          }
-        },
-        "description": "Delete a drink from his ID",
-        "tags": ["Drinks"],
-        "security": [],
-        "parameters": [
-          {
-            "description": "ID of the drink. 12 or 24 based hexa string",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/images": {
-      "post": {
-        "operationId": "AddPicturesRoute",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        },
-        "description": "Create a new drink.\nSize limit to 2Mb",
-        "tags": ["Images"],
-        "security": [],
-        "parameters": []
-      }
-    }
-  },
-  "servers": [
-    {
-      "url": "/"
-    }
-  ]
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Drink": {
+				"properties": {
+					"images": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"providedBy": {
+						"type": "string"
+					},
+					"date": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"category": {
+						"type": "string"
+					},
+					"_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"providedBy",
+					"date",
+					"name",
+					"_id"
+				],
+				"type": "object"
+			},
+			"Pick_Drink.Exclude_keyofDrink._id__": {
+				"properties": {
+					"category": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"date": {
+						"type": "number",
+						"format": "double"
+					},
+					"providedBy": {
+						"type": "string"
+					},
+					"images": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"name",
+					"date",
+					"providedBy"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"Omit_Drink._id_": {
+				"$ref": "#/components/schemas/Pick_Drink.Exclude_keyofDrink._id__",
+				"description": "Construct a type with the properties of T except for those in type K."
+			},
+			"DrinkCreation": {
+				"$ref": "#/components/schemas/Omit_Drink._id_"
+			},
+			"Partial_DrinkCreation_": {
+				"properties": {
+					"category": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"date": {
+						"type": "number",
+						"format": "double"
+					},
+					"providedBy": {
+						"type": "string"
+					},
+					"images": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"PartialDrink": {
+				"$ref": "#/components/schemas/Partial_DrinkCreation_"
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "my-cellar-back",
+		"version": "0.0.1",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/drinks": {
+			"get": {
+				"operationId": "GetDrinksRoute",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Drink"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetch all drinks",
+				"tags": [
+					"Drinks"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "AddDrinkRoute",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"description": "Create a new drink",
+				"tags": [
+					"Drinks"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DrinkCreation"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/drinks/{id}": {
+			"get": {
+				"operationId": "GetDrinkRoute",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Drink"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetch one drink from his ID",
+				"tags": [
+					"Drinks"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "ID of the drink. 12 or 24 based hexa string",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "EditDrinkRoute",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"description": "Edit a a drink from his ID.\nReplace all properties of the drink",
+				"tags": [
+					"Drinks"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "ID of the drink. 12 or 24 based hexa string",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DrinkCreation"
+							}
+						}
+					}
+				}
+			},
+			"patch": {
+				"operationId": "PatchDrinkRoute",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"description": "Patch a a drink from his ID.\nReplace only specified properties of the drink",
+				"tags": [
+					"Drinks"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "ID of the drink. 12 or 24 based hexa string",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PartialDrink"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteDrinkRoute",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "Delete a drink from his ID",
+				"tags": [
+					"Drinks"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "ID of the drink. 12 or 24 based hexa string",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/images": {
+			"post": {
+				"operationId": "AddPicturesRoute",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Create a new drink image.\nSize limit to 2Mb",
+				"tags": [
+					"Images"
+				],
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
 }

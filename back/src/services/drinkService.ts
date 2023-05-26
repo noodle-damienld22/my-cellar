@@ -33,7 +33,7 @@ async function addDrink(db: Db, drinkCreation: DrinkCreation): Promise<string> {
 
 async function editDrink(db: Db, id: string, updatedDrink: DrinkCreation): Promise<string> {
   const _id = new ObjectId(id);
-  const { matchedCount } = await db.collection(DB_DRINKS_COLLECTION).updateOne({ _id }, { _id, ...updatedDrink });
+  const { matchedCount } = await db.collection(DB_DRINKS_COLLECTION).replaceOne({ _id }, { _id, ...updatedDrink });
   if (matchedCount === 0) {
     throw new NotFoundError(id);
   }
