@@ -1,6 +1,6 @@
 import { Grid } from "@nextui-org/react";
 import { IonButton, IonImg } from "@ionic/react";
-import { FC, useState } from "react";
+import { useState } from "react";
 import { usePhotoGallery } from "../../hook/usePhotoGallery";
 import CancelButton from "../Button/CancelButton";
 import ValidateButton from "../Button/ValidateButton";
@@ -8,24 +8,13 @@ import ListSelector from "./ListSelector";
 import TextInput from "./TextInput";
 import HeaderModal from "./HeaderModal";
 
-interface DrinkFormProps {
-  onSubmit: (formData: FormData) => void;
-  datePicker: JSX.Element;
-  onCancel: () => void;
-}
-
-interface FormData {
-  title: string;
-  providedBy: string;
-}
-
-const DrinkForm: FC<DrinkFormProps> = ({ onSubmit, datePicker, onCancel }) => {
+const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
   const [title, setTitle] = useState("");
   const [providedBy, setProvidedBy] = useState("");
   const { photo, takePhoto } = usePhotoGallery();
 
   const handleSave = () => {
-    const formData: FormData = {
+    const formData = {
       title,
       providedBy,
     };

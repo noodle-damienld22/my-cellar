@@ -1,6 +1,6 @@
 import { IonHeader, IonTitle, IonToolbar } from "@ionic/react";
 
-const Header: React.FC = () => {
+const Header = () => {
   return (
     <IonHeader>
       <IonToolbar>
