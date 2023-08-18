@@ -4,9 +4,8 @@ import {
   IonItem,
   IonLabel,
 } from "@ionic/react";
-import { FC } from "react";
 
-const ListSelector: FC = () => {
+const ListSelector = () => {
   return (
     <>
       <IonAccordionGroup>

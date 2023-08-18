@@ -1,18 +1,6 @@
-// DatePicker.tsx
-import { FC } from "react";
 import { IonDatetimeButton, IonModal, IonDatetime } from "@ionic/react";
 
-interface DatePickerProps {
-  open: boolean;
-  onOpenChange: (isOpen: boolean) => void;
-  onIonChange: (event: CustomEvent<any>) => void;
-}
-
-const DatePicker: FC<DatePickerProps> = ({
-  open,
-  onOpenChange,
-  onIonChange,
-}) => {
+const DatePicker = ({ open, onOpenChange, onIonChange }) => {
   return (
     <>
       <IonDatetimeButton

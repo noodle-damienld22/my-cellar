@@ -1,26 +1,16 @@
-// DrinkFormModal.tsx
 import { useState } from "react";
 import DrinkForm from "./DrinkForm";
 import DatePicker from "./DatePicker";
 
-interface FormData {
-  title: string;
-  providedBy: string;
-}
-
-interface DrinkFormModalProps {
-  onCancel: () => void;
-}
-
-const DrinkFormModal: React.FC<DrinkFormModalProps> = ({ onCancel }) => {
+const DrinkFormModal = ({ onCancel }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
 
-  const handleSave = (formData: FormData) => {
+  const handleSave = (formData) => {
     // Handle form data submission
   };
 
-  const handleDatePickerChange = (event: CustomEvent<any>) => {
+  const handleDatePickerChange = (event) => {
     setSelectedDate(event.detail.value);
   };
 
