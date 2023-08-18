@@ -22,24 +22,31 @@ import { NextUIProvider } from "@nextui-org/react";
 
 /* Theme variables */
 import "./theme/variables.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+const queryClient = new QueryClient();
 
 setupIonicReact();
 
 const App = () => (
-  <IonApp>
-    <NextUIProvider>
-      <IonReactRouter>
-        <IonRouterOutlet>
-          <Route exact path="/drinkListPage">
-            <DrinkListPage />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/drinkListPage" />
-          </Route>
-        </IonRouterOutlet>
-      </IonReactRouter>
-    </NextUIProvider>
-  </IonApp>
+  <QueryClientProvider client={queryClient}>
+    <IonApp>
+      <NextUIProvider>
+        <IonReactRouter>
+          <IonRouterOutlet>
+            <Route exact path="/drinkListPage">
+              <DrinkListPage />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/drinkListPage" />
+            </Route>
+          </IonRouterOutlet>
+        </IonReactRouter>
+      </NextUIProvider>
+    </IonApp>
+    <ReactQueryDevtools initialIsOpen />
+  </QueryClientProvider>
 );
 
 export default App;

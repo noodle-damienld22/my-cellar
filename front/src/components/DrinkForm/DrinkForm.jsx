@@ -8,14 +8,15 @@ import ListSelector from "./ListSelector";
 import TextInput from "./TextInput";
 
 const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
-  const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
   const [providedBy, setProvidedBy] = useState("");
   const { photo, takePhoto } = usePhotoGallery();
 
   const handleSave = () => {
     const formData = {
-      title,
+      name,
       providedBy,
+      photo,
     };
     onSubmit(formData);
   };
@@ -25,7 +26,7 @@ const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
   };
 
   const cancelForm = () => {
-    setTitle("");
+    setName("");
     setProvidedBy("");
     onCancel();
   };
@@ -37,7 +38,7 @@ const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
           <TextInput
             label="Nom de la bouteille : "
             placeHolder="Exemple: Bordeaux"
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </Grid>
         <Grid>
