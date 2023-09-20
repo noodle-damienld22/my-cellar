@@ -1,4 +1,4 @@
-import CloseButton from "../Button/CloseButton";
+import CloseButton from '../Button/CloseButton';
 
 const HeaderModal = ({ onClose }) => {
   return (

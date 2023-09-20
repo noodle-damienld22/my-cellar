@@ -42,7 +42,9 @@
     "dev": "ionic serve",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons)/)'",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "check": "eslint . && prettier --check .",
+    "fix": "eslint --fix . && prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -61,5 +63,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.49.0",
+    "eslint-plugin-react": "^7.33.2",
+    "prettier": "^3.0.3"
   }
 }

@@ -1,4 +1,4 @@
-import { Grid, Button } from "@nextui-org/react";
+import { Grid, Button } from '@nextui-org/react';
 
 const ValidateButton = ({ onClick }) => {
   return (

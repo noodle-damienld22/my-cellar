@@ -1,12 +1,12 @@
-import axios from "axios";
-import urlJoin from "url-join";
-import config from "../config";
+import axios from 'axios';
+import urlJoin from 'url-join';
+import config from '../config';
 
 /**
  * Get all drinks
  */
 export async function getDrinks() {
-  const { data } = await axios.get(urlJoin(config.API_BASE_URL, "drinks"));
+  const { data } = await axios.get(urlJoin(config.API_BASE_URL, 'drinks'));
   return data;
 }
 
@@ -16,7 +16,7 @@ export async function getDrinks() {
  * @returns Drink item
  */
 export async function getOneDrink(id) {
-  const { data } = await axios.get(urlJoin(config.API_BASE_URL, "drinks", id));
+  const { data } = await axios.get(urlJoin(config.API_BASE_URL, 'drinks', id));
   return data;
 }
 
@@ -25,15 +25,11 @@ export async function getOneDrink(id) {
  * @param {object} body Drink form
  */
 export async function createDrink(body) {
-  const { data } = await axios.post(
-    urlJoin(config.API_BASE_URL, "drinks"),
-    body,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const { data } = await axios.post(urlJoin(config.API_BASE_URL, 'drinks'), body, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   return data;
 }
 
@@ -44,15 +40,11 @@ export async function createDrink(body) {
  * @returns ID of the updated drink
  */
 export async function replaceDrink(id, body) {
-  const { data } = await axios.put(
-    urlJoin(config.API_BASE_URL, "drinks", id),
-    body,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const { data } = await axios.put(urlJoin(config.API_BASE_URL, 'drinks', id), body, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   return data;
 }
 
@@ -63,15 +55,11 @@ export async function replaceDrink(id, body) {
  * @returns ID of the updated drink
  */
 export async function editDrink(id, body) {
-  const { data } = await axios.patch(
-    urlJoin(config.API_BASE_URL, "drinks", id),
-    body,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const { data } = await axios.patch(urlJoin(config.API_BASE_URL, 'drinks', id), body, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   return data;
 }
 
@@ -80,7 +68,7 @@ export async function editDrink(id, body) {
  * @param {string} id ID the of the drink we want to delete
  */
 export async function deleteDrink(id) {
-  return axios.delete(urlJoin(config.API_BASE_URL, "drinks", id));
+  return axios.delete(urlJoin(config.API_BASE_URL, 'drinks', id));
 }
 
 /**
@@ -90,17 +78,13 @@ export async function deleteDrink(id) {
  */
 export async function uploadPicture(picture) {
   const formData = new FormData();
-  formData.append("file", picture);
+  formData.append('file', picture);
 
-  const { data } = await axios.post(
-    urlJoin(config.API_BASE_URL, "images"),
-    formData,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
-  );
+  const { data } = await axios.post(urlJoin(config.API_BASE_URL, 'images'), formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 
   return data.filePath;
 }

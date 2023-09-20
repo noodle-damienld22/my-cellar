@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
+import { useState } from 'react';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 export function usePhotoGallery() {
   const [photo, setPhoto] = useState();

@@ -1,8 +1,8 @@
-import { IonContent, IonPage, IonButton, IonModal } from "@ionic/react";
-import { useState } from "react";
-import DrinkFormModal from "../components/DrinkForm/DrinkFormModal";
-import Header from "../components/Header.jsx";
-import { PlusCircle } from "react-bootstrap-icons";
+import { IonContent, IonPage, IonButton, IonModal } from '@ionic/react';
+import { useState } from 'react';
+import DrinkFormModal from '../components/DrinkForm/DrinkFormModal';
+import Header from '../components/Header.jsx';
+import { PlusCircle } from 'react-bootstrap-icons';
 
 const DrinkListPage = () => {
   const [openModal, setOpenModal] = useState(false);

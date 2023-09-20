@@ -1,9 +1,4 @@
-import {
-  IonAccordion,
-  IonAccordionGroup,
-  IonItem,
-  IonLabel,
-} from "@ionic/react";
+import { IonAccordion, IonAccordionGroup, IonItem, IonLabel } from '@ionic/react';
 
 const ListSelector = () => {
   return (
