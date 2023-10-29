@@ -1,5 +1,5 @@
 import { Grid } from '@nextui-org/react';
-import { IonButton, IonImg } from '@ionic/react';
+import { IonButton, IonContent, IonImg } from '@ionic/react';
 import { useState } from 'react';
 import { usePhotoGallery } from '../../hook/usePhotoGallery';
 import CancelButton from '../Button/CancelButton';
@@ -9,14 +9,15 @@ import TextInput from './TextInput';
 import HeaderModal from './HeaderModal';
 
 const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
-  const [title, setTitle] = useState('');
+  const [name, setName] = useState('');
   const [providedBy, setProvidedBy] = useState('');
-  const { photo, takePhoto } = usePhotoGallery();
+  const { image, takePhoto } = usePhotoGallery();
 
   const handleSave = () => {
     const formData = {
-      title,
+      name,
       providedBy,
+      image
     };
     onSubmit(formData);
   };
@@ -26,13 +27,13 @@ const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
   };
 
   const cancelForm = () => {
-    setTitle('');
+    setName('');
     setProvidedBy('');
     onCancel();
   };
 
   return (
-    <>
+    <IonContent>
       <Grid.Container gap={1} justify={'flex-end'}>
         <HeaderModal onClose={cancelForm} />
       </Grid.Container>
@@ -41,7 +42,7 @@ const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
           <TextInput
             label="Nom de la bouteille : "
             placeHolder="Exemple: Bordeaux"
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </Grid>
         <Grid>
@@ -50,7 +51,7 @@ const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
         <Grid>{datePicker}</Grid>
         <Grid>
           <IonButton onClick={handleTakePhoto}>Prendre une photo</IonButton>
-          {photo && <IonImg src={photo} />}
+          {image && <IonImg src={image} style={{ width: '100px', height: '100px', objectFit: 'cover' }} />}
         </Grid>
         <Grid>
           <TextInput
@@ -68,7 +69,7 @@ const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
           <ValidateButton onClick={handleSave} />
         </Grid>
       </Grid.Container>
-    </>
+    </IonContent>
   );
 };
 

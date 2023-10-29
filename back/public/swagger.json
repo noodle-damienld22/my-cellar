@@ -103,6 +103,17 @@
 			},
 			"PartialDrink": {
 				"$ref": "#/components/schemas/Partial_DrinkCreation_"
+			},
+			"ImageResponse": {
+				"properties": {
+					"filePath": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"filePath"
+				],
+				"type": "object"
 			}
 		},
 		"securitySchemes": {}
@@ -321,12 +332,13 @@
 						"description": "Created",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"$ref": "#/components/schemas/ImageResponse"
+								}
 							}
 						}
 					}
 				},
-				"description": "Create a new drink image.\nSize limit to 2Mb",
 				"tags": [
 					"Images"
 				],

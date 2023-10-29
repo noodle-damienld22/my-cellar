@@ -25,12 +25,24 @@ export async function getOneDrink(id) {
  * @param {object} body Drink form
  */
 export async function createDrink(body) {
-  const { data } = await axios.post(urlJoin(config.API_BASE_URL, 'drinks'), body, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return data;
+  try {
+    const { data } = await axios.post(urlJoin(config.API_BASE_URL, 'drinks'), body, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    return data;
+  } catch (error) {
+    if (error.response) {
+      console.error("Erreur de l'API:", error.response.data);
+      console.error('Status:', error.response.status);
+      console.error('Headers:', error.response.headers);
+    } else if (error.request) {
+      console.error("Pas de réponse de l'API:", error.request);
+    } else {
+      console.error('Erreur lors de la création de la demande:', error.message);
+    }
+  }
 }
 
 /**
@@ -42,8 +54,8 @@ export async function createDrink(body) {
 export async function replaceDrink(id, body) {
   const { data } = await axios.put(urlJoin(config.API_BASE_URL, 'drinks', id), body, {
     headers: {
-      'Content-Type': 'application/json',
-    },
+      'Content-Type': 'application/json'
+    }
   });
   return data;
 }
@@ -57,8 +69,8 @@ export async function replaceDrink(id, body) {
 export async function editDrink(id, body) {
   const { data } = await axios.patch(urlJoin(config.API_BASE_URL, 'drinks', id), body, {
     headers: {
-      'Content-Type': 'application/json',
-    },
+      'Content-Type': 'application/json'
+    }
   });
   return data;
 }
@@ -82,8 +94,8 @@ export async function uploadPicture(picture) {
 
   const { data } = await axios.post(urlJoin(config.API_BASE_URL, 'images'), formData, {
     headers: {
-      'Content-Type': 'multipart/form-data',
-    },
+      'Content-Type': 'multipart/form-data'
+    }
   });
 
   return data.filePath;
