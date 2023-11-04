@@ -1,6 +1,6 @@
 import { Grid } from '@nextui-org/react';
 import { IonButton, IonContent, IonImg } from '@ionic/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Importez useEffect
 import { usePhotoGallery } from '../../hook/usePhotoGallery';
 import CancelButton from '../Button/CancelButton';
 import ValidateButton from '../Button/ValidateButton';
@@ -8,16 +8,23 @@ import ListSelector from './ListSelector';
 import TextInput from './TextInput';
 import HeaderModal from './HeaderModal';
 
-const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
+const DrinkForm = ({ onSubmit, datePicker, onCancel, drinkToEdit }) => {
   const [name, setName] = useState('');
   const [providedBy, setProvidedBy] = useState('');
   const { image, takePhoto } = usePhotoGallery();
+
+  useEffect(() => {
+    if (drinkToEdit) {
+      setName(drinkToEdit.name || '');
+      setProvidedBy(drinkToEdit.providedBy || '');
+    }
+  }, [drinkToEdit]);
 
   const handleSave = () => {
     const formData = {
       name,
       providedBy,
-      image
+      image,
     };
     onSubmit(formData);
   };
@@ -43,6 +50,7 @@ const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
             label="Nom de la bouteille : "
             placeHolder="Exemple: Bordeaux"
             onChange={(e) => setName(e.target.value)}
+            value={name}
           />
         </Grid>
         <Grid>
@@ -58,6 +66,7 @@ const DrinkForm = ({ onSubmit, datePicker, onCancel }) => {
             label="Offert par :"
             placeHolder="Exemple: Nom de la personne"
             onChange={(e) => setProvidedBy(e.target.value)}
+            value={providedBy}
           />
         </Grid>
       </Grid.Container>

@@ -1,6 +1,6 @@
 import { Input } from '@nextui-org/react';
 
-const TextInput = ({ label, placeHolder, onChange }) => {
+const TextInput = ({ label, placeHolder, onChange, value }) => {
   return (
     <>
       <Input
@@ -11,6 +11,7 @@ const TextInput = ({ label, placeHolder, onChange }) => {
         placeholder={placeHolder}
         onChange={onChange}
         color="default"
+        value={value}
       />
     </>
   );

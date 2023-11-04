@@ -1,12 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DrinkForm from './DrinkForm';
 import DatePicker from './DatePicker';
-import { createDrink, uploadPicture } from '../../requests/drinks';
+import { createDrink, replaceDrink, uploadPicture } from '../../requests/drinks';
 
-const DrinkFormModal = ({ onCancel, onSuccess }) => {
+const DrinkFormModal = ({ onCancel, onSuccess, drinkToEdit, fetchDrinks }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null); // État local pour le DatePicker
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (drinkToEdit) {
+      setIsEditing(true);
+      if (drinkToEdit.date) {
+        const date = new Date(drinkToEdit.date);
+        setSelectedDate(date.toISOString());
+      }
+    }
+  }, [drinkToEdit]);
 
   const handleSave = async (formData) => {
     formData.date = new Date(selectedDate).getTime();
@@ -22,12 +33,16 @@ const DrinkFormModal = ({ onCancel, onSuccess }) => {
           return;
         }
       }
-      const response = await createDrink(formData);
-      console.log('response', response);
+      if (isEditing) {
+        await replaceDrink(drinkToEdit._id, formData);
+      } else {
+        await createDrink(formData);
+      }
       onSuccess();
+      fetchDrinks();
     } catch (error) {
       console.error('Erreur lors de la création de la boisson:', error);
-      setErrorMessage('Erreur lors de la création . Veuillez réessayer.');
+      setErrorMessage('Erreur lors de la création. Veuillez réessayer.');
     }
   };
 
@@ -39,10 +54,16 @@ const DrinkFormModal = ({ onCancel, onSuccess }) => {
     <>
       <DrinkForm
         datePicker={
-          <DatePicker open={showDatePicker} onOpenChange={setShowDatePicker} onIonChange={handleDatePickerChange} />
+          <DatePicker
+            open={showDatePicker}
+            onOpenChange={setShowDatePicker}
+            onIonChange={handleDatePickerChange}
+            value={selectedDate}
+          />
         }
         onSubmit={handleSave}
         onCancel={onCancel}
+        drinkToEdit={drinkToEdit}
       />
       {errorMessage && <div style={{ color: 'red', marginTop: '10px', textAlign: 'center' }}>{errorMessage}</div>}
     </>

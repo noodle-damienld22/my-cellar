@@ -8,7 +8,7 @@ export function usePhotoGallery() {
     const image = await Camera.getPhoto({
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Camera,
-      quality: 60
+      quality: 60,
     });
 
     setImage(image.dataUrl);
@@ -16,6 +16,6 @@ export function usePhotoGallery() {
 
   return {
     image,
-    takePhoto
+    takePhoto,
   };
 }
